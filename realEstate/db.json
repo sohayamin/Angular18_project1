@@ -1,0 +1,81 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "propertyType": "Flat1"
+    },
+    {
+      "propertyType": "Building",
+      "id": 2
+    }
+  ],
+  "sites": [
+    {
+      "id": 1,
+      "siteTitle": "Site1",
+      "location": "Pune",
+      "propertyTypeId": "1",
+      "city": "Pune",
+      "pincode": "450002",
+      "state": "MH",
+      "totalProperties": 5
+    },
+    {
+      "id": 2,
+      "siteTitle": "Site 2",
+      "location": "Meerut",
+      "propertyTypeId": "2",
+      "city": "Meerut",
+      "pincode": "450002",
+      "state": "UP",
+      "totalProperties": 14
+    }
+  ],
+  "property": [
+    {
+      "propertyId": 0,
+      "propertyNo": "102",
+      "facing": "South",
+      "totalArea": "6000",
+      "rate": 1400,
+      "siteId": 1,
+      "id": 1
+    },
+    {
+      "propertyId": 0,
+      "propertyNo": "103",
+      "facing": "South",
+      "totalArea": "6000",
+      "rate": 1400,
+      "siteId": 1,
+      "id": 2
+    },
+    {
+      "propertyId": 0,
+      "propertyNo": 103,
+      "facing": "South",
+      "totalArea": "3000",
+      "rate": 1200,
+      "siteId": 1,
+      "id": 3
+    },
+    {
+      "propertyId": 0,
+      "propertyNo": 104,
+      "facing": "South",
+      "totalArea": "800",
+      "rate": 180,
+      "siteId": 2,
+      "id": 4
+    },
+    {
+      "propertyId": 0,
+      "propertyNo": 105,
+      "facing": "East",
+      "totalArea": "700",
+      "rate": 16,
+      "siteId": 2,
+      "id": 5
+    }
+  ]
+}

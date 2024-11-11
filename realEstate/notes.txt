@@ -1,0 +1,6 @@
+1. npm i bootstrap
+2. npm i font-awesome
+3. https://codepen.io/leonam-silva-de-souza/pen/VwJVrBR
+4. https://getbootstrap.com/docs/5.3/examples/sidebars/
+5. provideHttpClient()
+6. ng g environments

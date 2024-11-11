@@ -1,0 +1,238 @@
+<div class="container mt-5">
+
+    @if(isFormView()) {
+        <div class="card mb-4">
+            <div class="card-header bg-primary">               
+               <div class="row">
+                    <div class="col-6">
+                        <h5>Create/Update Sites</h5>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button class="btn btn-success btn-sm" (click)="toggleView()">Go to List</button>
+                    </div>
+               </div>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row mb-3">
+                        <!-- <div class="col-md-6">
+                            <label for="siteId" class="form-label">Site Id</label>
+                            <input type="number" class="form-control" id="siteId" placeholder="Enter site Id">
+                        </div> -->
+                        <div class="col-md-6">
+                            <label for="" class="form-label">Site Title</label>
+                            <input type="text" name="siteTitle" [(ngModel)]="formObj.siteTitle" class="form-control" id="siteTitle" placeholder="Enter site title">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="" class="form-label">Location</label>
+                            <input type="text" name="location" [(ngModel)]="formObj.location" class="form-control" id="location" placeholder="Enter location">
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">Select property type</label>
+                            <!-- <input type="number" name="propertyTypeId" [(ngModel)]="formObj.propertyTypeId" location class="form-control"> -->
+                            <select name="propertyTypeId" [(ngModel)]="formObj.propertyTypeId" class="form-select">
+                                    <option value="">Select property type</option>
+                                    @for(item of items; track $index) {
+                                        <option [value]="item.id">{{item.propertyType}}</option>
+                                    }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="" class="form-label">City</label>
+                            <input type="text" name="city" [(ngModel)]="formObj.city" class="form-control" id="city" placeholder="..city">
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">Pin Code</label>
+                            <input type="text" name="pincode" [(ngModel)]="formObj.pincode" class="form-control" id="pincode" placeholder="pincode">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="" class="form-label">State</label>
+                            <input type="text" name="state" [(ngModel)]="formObj.state" class="form-control" id="state" placeholder="state">
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">Total Properties</label>
+                            <input type="number" name="totalproperties" [(ngModel)]="formObj.totalProperties" class="form-control" id="totalproperties">
+                        </div>
+                    </div>
+                    <!-- <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="" class="form-label">Created Date</label>
+                            <input type="text" name="createdDate" [(ngModel)]="formObj.createdDate" class="form-control" id="createdDate" placeholder="created date">
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">Last Updated Date</label>
+                            <input type="text" name="lastUpdatedDate" [(ngModel)]="formObj.lastUpdatedDate" class="form-control" id="lastUpdatedDate" placeholder="last updated date">
+                        </div>
+                    </div> -->
+                    <div class="text-center">
+                        <button type="button" *ngIf="formObj.id==0" class="btn btn-primary" (click)="onSave()" >{{formObj.id}} Save</button>
+                        <button type="button" *ngIf="formObj.id!==0" class="btn btn-primary" (click)="onUpdate(formObj)" >{{formObj | json}} Update</button>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+    
+            </div>
+        </div>
+    } @else {
+        <div class="card">
+            <div class="card-header bg-primary">
+                <div class="row">
+                    <div class="col-6">
+                        <h5>List of Sites</h5>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button class="btn btn-success btn-sm" (click)="toggleView()">Create New</button>
+                    </div>
+               </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Site Title</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">City</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Pincode</th>
+                        <th scope="col">Total Properties</th>
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="data.length==0">
+                            <tr>
+                                <td colspan="9" class="text-center">
+                                    <p>No records found</p>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-container *ngIf="data.length!==0">
+                            <tr *ngFor="let d of data; let sr=index;">
+                                <th scope="row">{{d.id}}</th>
+                                <td>{{d.siteTitle}}</td>
+                                <td>{{d.location}}</td>
+                                <td>{{d.city}}</td>
+                                <td>{{d.state}}</td>
+                                <td>{{d.pincode}}</td>
+                                <td>{{d.totalProperties}}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm" (click)="onEdit(d)">Edit</button>&nbsp;
+                                    <button class="btn btn-primary btn-sm" (click)="onModal(d)">Properties</button>&nbsp;
+                                    <button class="btn btn-warning btn-sm" (click)="onDelete(d.id)">Delete</button>
+                                </td>
+                              </tr>
+                        </ng-container>
+                      
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    }
+</div>
+
+
+<!-- Modal -->
+<div class="modal" #propertyModal>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="btn-close" (click)="onClose()" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-8">
+                    <div class="card">
+                        <div class="card-header bg-primary">
+                            <h5>Heading 2</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-sm">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Property Number</th>
+                                    <th scope="col">Facing</th>
+                                    <th scope="col">Total area</th>
+                                    <th scope="col">Rate</th>
+                                    <th scope="col">Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    @for(item of propertyList; track $index) {
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>{{item.propertyNo}}</td>
+                                            <td>{{item.facing}}</td>
+                                            <td>{{item.totalArea}}</td>
+                                            <td>{{item.rate}}</td>
+                                            <td>
+                                                <button class="btn btn-primary">Edit</button>&nbsp;
+                                                <button class="btn btn-warning">Delete</button>
+                                            </td>
+                                          </tr>
+                                    }                                
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="text-center">
+                                    <h5>Create/Update property details.</h5>
+                                </div>
+                           </div>
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="propertyForm">
+                                <div class="row mb-3">
+                                    <div class="col-md-12">
+                                        <label for="propertyNo" class="form-label">Property Number</label>
+                                        <input type="number" class="form-control" formControlName="propertyNo" id="propertyNo" placeholder="Enter property number">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">    
+                                    <div class="col-md-6">
+                                        <label for="facing" class="form-label">Facing</label>
+                                        <input type="text" class="form-control" formControlName="facing" id="facing" placeholder="Enter facing">
+                                    </div>                                                              
+                                    <div class="col-md-6">
+                                        <label for="totalarea" class="form-label">Total Area</label>
+                                        <input type="text" class="form-control" formControlName="totalArea" id="totalArea" placeholder="Enter total area (eg: 1500 per sqft)">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">    
+                                    <div class="col-md-12">
+                                        <label for="rate" class="form-label">Rate</label>
+                                        <input type="number" class="form-control" formControlName="rate" id="rate" placeholder="Enter rate (eg: 5000 per sqft)">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" (click)="onSaveProperty()">Save</button>
+                            </form>
+                        </div>   
+                    </div>
+                </div>
+             </div>   
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="onClose()" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+</div>
+  

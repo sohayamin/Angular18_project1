@@ -1,0 +1,70 @@
+<div class="container mt-5">
+    <!-- <h2 class="mb-4">Customer Management</h2> -->
+     <div class="row">
+        <div class="col-8">
+            <div id="customerList" class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Properties List</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Property Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for(item of gridData; track $index) {
+                                <tr>
+                                    <td scope="row">{{$index+1}}</td>
+                                    <td>{{item.propertyType}}</td>
+                                    <td>
+                                        <button class="btn btn-warning btn-sm" (click)="onEdit(item)">Edit</button>&nbsp;
+                                        <button class="btn btn-danger btn-sm" (click)="onDelete(item.id)">Delete</button>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                 </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card mb-4">
+                <div class="card-header">Add Customer</div>
+                <div class="card-body">
+                    <form [formGroup]="formSign" id="customerForm">
+                        <div class="form-group">
+                            <label for="name">Property Name</label>
+                            <input type="text" formControlName="propertyType" class="form-control" id="name">
+                            @if(formSign.controls['propertyType'].touched) {
+                                <div class="text-danger">
+                                    @if(formSign.controls['propertyType'].errors?.['required']) {
+                                        <span>This feild is required</span>
+                                    }
+                                    @if(formSign.controls['propertyType'].errors?.['minlength']) {
+                                        <span>minimum length required is 5.</span>
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <div class="text-center">
+                            @if(isEdit==false) {
+                            <button type="button" [disabled]="!formSign.valid" (click)="onSave()" class="btn btn-primary mt-2">Save</button>
+                            } @else {
+                            <button type="button" [disabled]="!formSign.valid" (click)="onUpdate()" class="btn btn-primary mt-2">Update</button>
+                            }
+                        </div>
+                    </form>
+                </div>       
+            </div>
+        </div>
+     </div>
+</div>
+
+<!-- Properrty Details List table -->
+ 
